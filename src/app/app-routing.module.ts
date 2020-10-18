@@ -7,11 +7,6 @@ import { MonitoramentoComponent } from './monitoramento/monitoramento/monitorame
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    component: AppComponent
-  },
-  {
     path: 'monitoramento',
     component: MonitoramentoComponent
   },

@@ -1,1 +1,42 @@
-<p>cadastro works!</p>
+<span class="po-font-title">Track Your Drone</span>
+
+<form #f="ngForm">
+    <div class="po-row">
+      <po-input class="po-sm-6" name="label" [(ngModel)]="droneId" p-label="DroneID"></po-input>
+      </div>
+
+      <div class="po-row">
+        <po-input class="po-sm-6" name="label" [(ngModel)]="latitude" p-label="Latitude"></po-input>
+        </div>
+
+        <div class="po-row">
+            <po-input class="po-sm-6" name="label" [(ngModel)]="longitude" p-label="Longitude"></po-input>
+            </div>
+
+            <mat-slider class = "po-lg-6"
+                [(ngModel)]= "temperature"
+                p-label="Temperature"
+                thumbLabel
+                [displayWith]="temperatureLabel"
+                tickInterval="40"
+                min="-25"
+                max="40">
+            </mat-slider>
+
+
+
+            <mat-slider class = "po-lg-6"
+                [(ngModel)]= "airHumidity"
+                p-label="Air Humidity"
+                thumbLabel
+                [displayWith]="airHumidityLabel"
+                tickInterval="100"
+                min="0"
+                max="100">
+            </mat-slider>
+
+
+        <div class="po-row">
+            <po-button class="po-md-3" p-label="Enable Tracking" (p-click)="restore()"></po-button>
+        </div>
+</form>

@@ -11,6 +11,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatSliderModule } from "@angular/material/slider";
 import { PoModule } from '@po-ui/ng-components';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { RouterModule } from '@angular/router';
     BrowserAnimationsModule,
     MatMenuModule,
     MatSliderModule,
+    FormsModule,
     PoModule,
     RouterModule.forRoot([])
   ],

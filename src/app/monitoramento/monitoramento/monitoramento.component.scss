@@ -1,0 +1,10 @@
+:host {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 0px;
+}
+:host ::ng-deep .monitor{
+    display: grid;
+    grid-template-columns: 45% 55%;
+}

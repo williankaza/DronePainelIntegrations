@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { PoMenuItem } from '@po-ui/ng-components';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -13,8 +12,9 @@ export class AppComponent {
   constructor(private router: Router, private route: ActivatedRoute){ }
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Monitoramento', action: this.goToMonitoramento.bind(this), icon:"icon-home", shortLabel:"Monitor" },
-    { label: 'Cadastro', action: this.goToCadastro.bind(this), icon:"icon-home", shortLabel: 'Cadastro' }
+    { label: 'Home', action: this.goToHome.bind(this), icon: 'po-icon-home', shortLabel: "Home"},
+    { label: 'Monitoramento', action: this.goToMonitoramento.bind(this), icon:"po-icon-world", shortLabel:"Monitor" },
+    { label: 'Cadastro', action: this.goToCadastro.bind(this), icon:"po-icon-archive", shortLabel: 'Cadastro' }
   ];
 
   private goToMonitoramento() {
@@ -25,4 +25,7 @@ export class AppComponent {
     this.router.navigate(['./drone'], { relativeTo: this.route})
   }
 
+  private goToHome(){
+    this.router.navigate(['/'])
+  }
 }
