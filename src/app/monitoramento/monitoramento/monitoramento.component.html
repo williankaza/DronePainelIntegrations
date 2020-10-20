@@ -1,5 +1,6 @@
 <div class="po-row">
 <po-input class="po-lg-12 po-sm-12 po-xl-12 po-md-12"
+    (p-change)="insertGMPApiKey($event)"
     p-label="Informe a chave para o Google Maps Platform"></po-input>
 </div>
 <div class="monitor po-row po-lg-12 po-sm-12 po-xl-12 po-md-12">
@@ -12,9 +13,38 @@
             >
         </po-table>
     </po-container>
-
     <po-container>
+        <agm-map style="height: 600px; display: inline;"
+            [latitude]="lat"
+            [longitude]="lng"
+            [zoom]="zoom"
+            [disableDefaultUI]="false"
+            [zoomControl]="false"
+            (mapClick)="mapClicked($event)">
         
+            <agm-marker 
+                *ngFor="let m of markers; let i = index"
+                (markerClick)="clickedMarker(m.label, i)"
+                [latitude]="m.lat"
+                [longitude]="m.lng"
+                [label]="m.label"
+                [markerDraggable]="m.draggable"
+                (dragEnd)="markerDragEnd(m, $event)">
+                
+            <agm-info-window>
+                <strong>InfoWindow content</strong>
+            </agm-info-window>
+            
+            </agm-marker>
+            
+            <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+                [radius]="5000"
+                [fillColor]="'red'"
+                [circleDraggable]="true"
+                [editable]="true">
+            </agm-circle>
+        
+        </agm-map>
     </po-container>
     <div style="background-color: red; width: 100%;">
         

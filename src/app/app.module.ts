@@ -13,6 +13,8 @@ import { PoModule } from '@po-ui/ng-components';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,13 @@ import { FormsModule } from '@angular/forms';
     MatSliderModule,
     FormsModule,
     PoModule,
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+      
+    }),
     RouterModule.forRoot([])
+
   ],
   providers: [],
   bootstrap: [AppComponent]
