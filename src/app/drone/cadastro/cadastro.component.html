@@ -1,42 +1,52 @@
-<span class="po-font-title">Track Your Drone</span>
+<div style = "background: lightblue; width: 100%; height: 450px; padding: 0 500px; margin: 20px 150px 40px">
 
-<form #f="ngForm">
-    <div class="po-row">
-      <po-input class="po-sm-6" name="label" [(ngModel)]="droneId" p-label="DroneID"></po-input>
-      </div>
+    <span class="po-font-title">Track Your Drone</span>
 
-      <div class="po-row">
-        <po-input class="po-sm-6" name="label" [(ngModel)]="latitude" p-label="Latitude"></po-input>
+
+
+    <form #f="ngForm" class = "template">
+        <div class="po-row">
+        <po-input class="po-sm-6" name="label" [(ngModel)]="droneId" p-label="DroneID"></po-input>
         </div>
 
         <div class="po-row">
-            <po-input class="po-sm-6" name="label" [(ngModel)]="longitude" p-label="Longitude"></po-input>
+            <po-input class="po-sm-6" name="label" [(ngModel)]="latitude" p-label="Latitude"></po-input>
             </div>
 
-            <mat-slider class = "po-lg-6"
-                [(ngModel)]= "temperature"
-                p-label="Temperature"
-                thumbLabel
-                [displayWith]="temperatureLabel"
-                tickInterval="40"
-                min="-25"
-                max="40">
-            </mat-slider>
+            <div class="po-row">
+                <po-input class="po-sm-6" name="label" [(ngModel)]="longitude" p-label="Longitude"></po-input>
+                </div>
+
+                <div class="po-row">
+                    <span>Temperature</span>
+                    <mat-slider class = "po-lg-6"
+                        [(ngModel)]= "temperature"
+                        p-label="Temperature"
+                        thumbLabel
+                        [displayWith]="temperatureLabel"
+                        tickInterval="40"
+                        min="-25"
+                        max="40">
+                    </mat-slider>
+                </div>
+
+                <div class="po-row">
+                    <span>Air Humidity</span>
+                    <mat-slider class = "po-lg-6"
+                        [(ngModel)]= "airHumidity"
+                        p-label="Air Humidity"
+                        thumbLabel
+                        [displayWith]="airHumidityLabel"
+                        tickInterval="100"
+                        min="0"
+                        max="100">
+                    </mat-slider>
+                </div>
 
 
 
-            <mat-slider class = "po-lg-6"
-                [(ngModel)]= "airHumidity"
-                p-label="Air Humidity"
-                thumbLabel
-                [displayWith]="airHumidityLabel"
-                tickInterval="100"
-                min="0"
-                max="100">
-            </mat-slider>
-
-
-        <div class="po-row">
-            <po-button class="po-md-3" p-label="Enable Tracking" (p-click)="restore()"></po-button>
-        </div>
-</form>
+            <div class="po-row">
+                <po-button class="po-md-3" p-label="Enable Tracking" (p-click)="restore()"></po-button>
+            </div>
+    </form>
+</div>
