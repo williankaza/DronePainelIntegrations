@@ -1,6 +1,7 @@
-<div style = "background: lightblue; width: 100%; height: 450px; padding: 0 500px; margin: 20px 150px 40px">
+<!-- <div style = "background: lightblue; width: 100%; height: 450px; padding: 0 500px; margin: 20px 150px 40px"></div> -->
 
-    <span class="po-font-title">Track Your Drone</span>
+    
+    <div><span class="po-font-title">Track Your Drone</span></div>
 
 
 
@@ -17,8 +18,12 @@
                 <po-input class="po-sm-6" name="label" [(ngModel)]="longitude" p-label="Longitude"></po-input>
                 </div>
 
-                <div class="po-row">
+                <div>
                     <span>Temperature</span>
+                </div>
+
+
+                <div class="po-row">
                     <mat-slider class = "po-lg-6"
                         [(ngModel)]= "temperature"
                         p-label="Temperature"
@@ -30,8 +35,9 @@
                     </mat-slider>
                 </div>
 
+                <div><span>Air Humidity</span></div>
+
                 <div class="po-row">
-                    <span>Air Humidity</span>
                     <mat-slider class = "po-lg-6"
                         [(ngModel)]= "airHumidity"
                         p-label="Air Humidity"
@@ -49,4 +55,3 @@
                 <po-button class="po-md-3" p-label="Enable Tracking" (p-click)="restore()"></po-button>
             </div>
     </form>
-</div>
