@@ -19,3 +19,15 @@
     background-size: 2000px;
     position: top;
 }
+
+.po-md-3{
+    color: red;
+}
+
+:host ::ng-deep .po-button{
+    background-color: #FFAC2B;
+    color: black;
+    border: white;
+    border-radius: 10px;
+    font-weight: bold;
+}

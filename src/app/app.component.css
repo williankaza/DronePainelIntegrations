@@ -1,1 +1,9 @@
+:host ::ng-deep .po-menu-collapse-button, :host ::ng-deep .po-menu-item, :host ::ng-deep .po-menu-item-no-data{
+    color: black;
+}
 
+
+:host ::ng-deep  .po-toolbar-title{
+    color: #FF4600;
+    font-weight: bold;
+}
