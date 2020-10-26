@@ -14,13 +14,16 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AgmCoreModule } from '@agm/core';
+import { MonitoramentoV2Component } from './monitoramento-v2/monitoramento-v2.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
     AppComponent,
     MonitoramentoComponent,
     ConsultaComponent,
-    CadastroComponent
+    CadastroComponent,
+    MonitoramentoV2Component
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { AgmCoreModule } from '@agm/core';
     MatSliderModule,
     FormsModule,
     PoModule,
+    GoogleMapsModule,
     AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
