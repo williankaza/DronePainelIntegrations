@@ -1,1 +1,15 @@
-<p>consulta works!</p>
+<body background=".\assets\background-drone.png" class = "background">
+
+    <div><span class="po-font-title">Consult Your Drone</span></div>
+
+   <div class="monitor po-row po-lg-12 po-sm-12 po-xl-12 po-md-12">
+        <po-container>
+            <po-table class="po-lg-12 po-md-12 po-sm-12 po-xl-12"
+                [p-columns]="gridCols"
+                [p-actions]="gridActions"
+                [p-items]="listDrones"
+                p-hide-columns-manager=true
+                >
+            </po-table>
+        </po-container>
+    </div>

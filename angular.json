@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "DronePainelIntegrations"
+  "defaultProject": "DronePainelIntegrations",
+  "cli": {
+    "analytics": "d62f329c-1bc1-409d-95a2-a53b06c02031"
+  }
 }

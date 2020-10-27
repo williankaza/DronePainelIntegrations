@@ -18,10 +18,6 @@ export class CadastroComponent implements OnInit {
     this.restore();
   }
 
-  testChange(){
-    
-  }
-
   restore() {
     this.droneId = undefined;
     this.latitude = undefined;
