@@ -8,3 +8,14 @@
     display: grid;
     grid-template-columns: 45% 55%;
 }
+
+:host ::ng-deep .po-table-header{
+    color: #546569;
+    font-weight: bold;
+    border-bottom: white;
+}
+
+:host ::ng-deep .po-table-single-action{
+    color: #FFAC2B;
+    font-weight: bold;
+}
