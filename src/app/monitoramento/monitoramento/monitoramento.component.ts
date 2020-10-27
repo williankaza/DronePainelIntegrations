@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PoTableColumn, PoTableAction } from '@po-ui/ng-components';
+import { PoTableColumn, PoTableAction, PoTableDetail } from '@po-ui/ng-components';
 import { MouseEvent, AgmCoreModule } from '@agm/core';
 import { Observable } from 'rxjs';
 import { GoogleMap } from '@angular/google-maps';
@@ -7,7 +7,9 @@ import { GoogleMap } from '@angular/google-maps';
 interface Medicoes{
   id: number,
   lat: number,
-  lng: number
+  lng: number,
+  umidade?: number,
+  temperatura?: number
 }
 
 interface Drones{
@@ -37,7 +39,7 @@ export class MonitoramentoComponent implements OnInit {
   markerOptions: google.maps.MarkerOptions = {draggable: false };
   polylineOptions: google.maps.PolylineOptions = { 
     geodesic: false,
-    strokeColor: "#FF0000",
+    strokeColor: "#FFAC2B",
     strokeOpacity: 1.0,
     strokeWeight: 2,
   }
@@ -47,11 +49,22 @@ export class MonitoramentoComponent implements OnInit {
   @ViewChild("mapsPolyline", { static: false }) mapsPolyline: google.maps.Polyline
   @ViewChild("mapsMarker", { static: false }) mapsMarker: google.maps.Marker
   
+  medicaoDetail: PoTableDetail = {
+    columns: [
+      { property: 'id', label: 'Sequencial' },
+      { property: 'lat', label: 'Latitude', type: 'number'},
+      { property: 'lng', label: 'Longitude', type: 'number' },
+      { property: 'umidade', label: 'Umidade', type: 'number' },
+      { property: 'temperatura', label: 'Temperatura', type: 'number' }
+    ], 
+    typeHeader: 'top'
+  };
+
   gridCols: Array<PoTableColumn> = [
     {
-      label: 'id',
+      label: 'Drone',
       property: 'id',
-      visible: false
+      visible: true
     },
     {
       label: 'Latitude',
@@ -72,49 +85,50 @@ export class MonitoramentoComponent implements OnInit {
     {
       label:'Follow',
       type: 'button'
-    }
+    },
+    { property: 'medicoes', label: 'Details', type: 'detail', detail: this.medicaoDetail }
   ]
 
   gridActions: Array<PoTableAction> = [
     {
       label: 'Follow',
-      action: this.insereDroneMap.bind(this)
+      action: (row)=>{
+        this.insertMarksCluster(row)
+      }
     }
   ]
-  insereDroneMap(){
-    
-  }
+  
   listDrones: Array<Drones> = [
     {
       id: '00000001',
-      latitude: 61.673858,
-      longitude: 27.815982, 
+      latitude: 34.5199,
+      longitude: -105.8701, 
       temperatura: -10,
       umidade: 450,
       medicoes: [
         {
           id: 1,
-          lat: 21.023232,
-          lng: -12.23231
+          lat: 41.3851,
+          lng: 2.1734
         },{
           id: 2,
-          lat: 37.10041,
-          lng: 21.5847
+          lat: -30.5595,
+          lng: 22.9375
         },{
           id: 3,
-          lat: -21.023232,
-          lng: -12.23231
+          lat: -34.6037,
+          lng: -58.3816
         },{
           id: 4,
-          lat: 70.023232,
-          lng: 22.23231
+          lat: 34.5199,
+          lng: -105.8701
         },
       ]
     },
     {
       id: '00000002',
-      latitude: 41.673858,
-      longitude: 7.815982, 
+      latitude: 51.5074,
+      longitude: 0.1278, 
       temperatura: -10,
       umidade: 450,
       medicoes: [
@@ -139,34 +153,34 @@ export class MonitoramentoComponent implements OnInit {
     },
     {
       id: '00000003',
-      latitude: 1.673858,
-      longitude: 57.815982, 
+      latitude: 10.4806,
+      longitude: -66.9036, 
       temperatura: -10,
       umidade: 450,
       medicoes: [
         {
           id: 1,
-          lat: 21.023232,
-          lng: -12.23231
+          lat: 25.2048,
+          lng: 55.2708
         },{
           id: 2,
-          lat: 7.10041,
-          lng: -1.5847
+          lat: 31.7917,
+          lng: -7.0926
         },{
           id: 3,
           lat: 21.023232,
           lng: -12.23231
         },{
           id: 4,
-          lat: 21.023232,
-          lng: -12.23231
+          lat: 10.4806,
+          lng: -66.9036
         },
       ]
     },
     {
       id: '00000004',
-      latitude: 11.673858,
-      longitude: -27.815982, 
+      latitude: 64.2008,
+      longitude: -149.4937, 
       temperatura: -10,
       umidade: 450,
       medicoes: [
@@ -180,12 +194,12 @@ export class MonitoramentoComponent implements OnInit {
           lng: -1.5847
         },{
           id: 3,
-          lat: 21.023232,
-          lng: -12.23231
+          lat: -33.8688,
+          lng: 151.2093
         },{
           id: 4,
-          lat: 21.023232,
-          lng: -12.23231
+          lat: 64.2008,
+          lng: -149.4937
         },
       ]
     }
@@ -200,6 +214,7 @@ export class MonitoramentoComponent implements OnInit {
       apiKey: key
     })
   }
+  
   initMap(): void {
     let initPos: google.maps.LatLng = new google.maps.LatLng(-23.574116, -46.623216)
     this.googleMaps.center = initPos;

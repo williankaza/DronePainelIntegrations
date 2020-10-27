@@ -1,11 +1,9 @@
-<div class="po-row">
-<po-input class="po-lg-12 po-sm-12 po-xl-12 po-md-12"
-    (p-change)="insertGMPApiKey($event)"
-    p-label="Enter the key for the Google Maps Platform"></po-input>
+<div class="po-row po-lg-12 po-xl-12 po-sm-12 po-md-12">
+    <p class="po-font-subtitle">Selecione o drone para visualizar o histórico no mapa</p>
 </div>
 <div class="monitor po-row po-lg-12 po-sm-12 po-xl-12 po-md-12">
-    <po-container>
-        <po-table class="po-lg-12 po-md-12 po-sm-12 po-xl-12"
+    <po-container class="po-pl-0 po-lg-12 po-xl-12 po-sm-12 po-md-12">
+        <po-table class="po-pl-0 po-lg-12 po-md-12 po-sm-12 po-xl-12"
             [p-columns]="gridCols"
             [p-actions]="gridActions"
             [p-items]="listDrones"
@@ -13,16 +11,13 @@
             >
         </po-table>
     </po-container>
-    <po-container p-height="600px">
+    <po-container p-height="600px" class='po-lg-12 po-xl-12 po-sm-12 po-md-12'>
         <google-map #maps  style="height: 600px; display: inline;">
-            <map-marker #mapsMarker *ngFor="let vertice of vertices"
+            <map-marker #mapsMarker *ngFor="let vertice of vertices; index as mapsIndex"
                       [position]="vertice"
+                      [label]="mapsIndex"
                       [options]="markerOptions"></map-marker>
             <map-polyline #mapsPolyline [path]="vertices" [options]="polylineOptions"></map-polyline>
         </google-map>
     </po-container>
-   
-
-<po-button p-label="Iniciar" (p-click)="initMarker()"></po-button>
-<!--po-button p-label="Adicionar" (p-click)="insertMarksCluster()"></po-button-->
 </div>

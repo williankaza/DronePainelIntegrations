@@ -1,23 +1,17 @@
 .template{
-    width: 100%; 
-    height: 450px; 
-    padding: 0 500px; 
-    margin: 40px 400px 40px;
-    display: block;
     color: #546569;
 }
 
 .po-font-title{
     width: 100%; 
     height: 450px; 
-    padding: 0 500px; 
-    margin: 40px 400px 40px;
 }
 
 
 .background{
-    background-size: 2000px;
+    background-size: 150%;
     position: top;
+    background-repeat: no-repeat;
 }
 
 :host ::ng-deep .po-button{

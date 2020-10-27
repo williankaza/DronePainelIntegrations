@@ -1,7 +1,6 @@
 .po-font-title{
     width: 100%; 
-    padding: 0 500px; 
-    margin: 40px 400px 40px;
+    padding: 0 00px; 
 }
 
 :host ::ng-deep .po-table-header{
@@ -26,9 +25,11 @@
 }
 
 :host ::ng-deep .po-container{
-    width: 50%; 
-    height: 300px; 
-    padding: 0 10px; 
-    margin: 100px 700px 10px;
     display: block;
+}
+
+.background{
+    background-size: 150%;
+    position: top;
+    background-repeat: no-repeat;
 }
