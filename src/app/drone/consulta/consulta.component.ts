@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PoTableColumn, PoTableAction } from '@po-ui/ng-components';
+import { PoTableAction } from '@po-ui/ng-components';
+import { PoTableColumn } from '@po-ui/ng-components';
 
+interface Drones{
+  id: string,
+}
 
 @Component({
   selector: 'app-consulta',
@@ -8,60 +12,49 @@ import { PoTableColumn, PoTableAction } from '@po-ui/ng-components';
   styleUrls: ['./consulta.component.scss']
 })
 export class ConsultaComponent implements OnInit {
+  gridCols: Array<PoTableColumn> = [
+    {
+      label: 'Drones Id',
+      property: 'id',
+    },
+    {
+      label:'Alterar',
+      type: 'button'
+    },
+    {
+      label:'Excluir',
+      type: 'button'
+    }
+  ]
 
-//   constructor() { }
+  gridActions: Array<PoTableAction> = [
+    {
+      label: 'Acompanhar',
+      action: this.ngOnInit.bind(this)
+    },
+    {
+      label: 'Excluir',
+      action: this.ngOnInit.bind(this)
+    }
+  ]
 
-  ngOnInit(): void {
+
+  listDrones: Array<Drones> = [
+    {
+      id: '00000001',
+    },
+    {
+      id: '00000002',
+    },
+    {
+      id: '00000003',
+    },
+    {
+      id: '00000004',
+    }
+  ]
+  constructor() { }
+
+  ngOnInit(): void { 
   }
-//     gridCols: Array<PoTableColumn> = [
-//       {
-//         label: 'id',
-//         property: 'id',
-//         //visible: false
-//       },
-//       {
-//         label:'Acompanhar',
-//         type: 'button'
-//       }
-//     ]
-
-//     gridActions: Array<PoTableAction> = [
-//       {
-//         label: 'Acompanhar',
-//         action: this.insereDroneMap.bind(this)
-//       }
-//     ]
-  
-//     listDrones: Array<Drones> = [
-//       {
-//         id: '00000001',
-//         latitude: 61.673858,
-//         longitude: 27.815982, 
-//         temperatura: -10,
-//         umidade: 450
-//       },
-//       {
-//         id: '00000002',
-//         latitude: 41.673858,
-//         longitude: 7.815982, 
-//         temperatura: -10,
-//         umidade: 450
-//       },
-//       {
-//         id: '00000003',
-//         latitude: 1.673858,
-//         longitude: 57.815982, 
-//         temperatura: -10,
-//         umidade: 450
-//       },
-//       {
-//         id: '00000004',
-//         latitude: 11.673858,
-//         longitude: -27.815982, 
-//         temperatura: -10,
-//         umidade: 450
-//       }
-//     ]
-//     }
 }
-

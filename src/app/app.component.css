@@ -7,3 +7,11 @@
     color: #FF4600;
     font-weight: bold;
 }
+
+:host ::ng-deep .po-icon-menu-close{
+    color: black;
+}
+
+:host ::ng-deep .po-icon-menu-open{
+    color: black;
+}

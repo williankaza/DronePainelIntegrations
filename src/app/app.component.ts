@@ -22,7 +22,7 @@ export class AppComponent {
   }
 
   private goToCadastro(){
-    this.router.navigate(['./drone/cadastro'], { relativeTo: this.route})
+    this.router.navigate(['./drone'], { relativeTo: this.route})
   }
 
   private goToHome(){
