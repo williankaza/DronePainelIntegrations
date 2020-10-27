@@ -39,22 +39,22 @@ export class MonitoramentoComponent implements OnInit {
       property: 'longitude'
     }, 
     {
-      label: 'Temperatura',
+      label: 'Temperature',
       property: 'temperatura'
     },
     {
-      label: 'Umidade do ar',
+      label: 'Air Humidity',
       property: 'umidade'
     },
     {
-      label:'Acompanhar',
+      label:'Follow',
       type: 'button'
     }
   ]
 
   gridActions: Array<PoTableAction> = [
     {
-      label: 'Acompanhar',
+      label: 'Follow',
       action: this.insereDroneMap.bind(this)
     }
   ]
