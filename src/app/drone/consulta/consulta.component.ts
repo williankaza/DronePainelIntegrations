@@ -18,22 +18,22 @@ export class ConsultaComponent implements OnInit {
       property: 'id',
     },
     {
-      label:'Alterar',
+      label:'Change',
       type: 'button'
     },
     {
-      label:'Excluir',
+      label:'Remove',
       type: 'button'
     }
   ]
 
   gridActions: Array<PoTableAction> = [
     {
-      label: 'Acompanhar',
+      label: 'Change',
       action: this.ngOnInit.bind(this)
     },
     {
-      label: 'Excluir',
+      label: 'Remove',
       action: this.ngOnInit.bind(this)
     }
   ]
