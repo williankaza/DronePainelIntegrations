@@ -1,1 +1,9 @@
-<google-map #maps></google-map>
+<google-map #maps  style="height: 600px; display: inline;">
+    <map-marker #mapsMarker *ngFor="let vertice of vertices"
+              [position]="vertice"
+              [options]="markerOptions"></map-marker>
+    <map-polyline #mapsPolyline [path]="vertices"></map-polyline>
+</google-map>
+
+<po-button p-label="Iniciar" (p-click)="initMarker()"></po-button>
+<po-button p-label="Adicionar" (p-click)="insertMarksCluster()"></po-button>

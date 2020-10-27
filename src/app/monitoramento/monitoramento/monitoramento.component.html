@@ -13,43 +13,16 @@
             >
         </po-table>
     </po-container>
-    <po-container>
-        <agm-map style="height: 600px; display: inline;"
-            [latitude]="lat"
-            [longitude]="lng"
-            [zoom]="zoom"
-            [disableDefaultUI]="false"
-            [zoomControl]="false"
-            (mapClick)="mapClicked($event)">
-        
-            <agm-marker 
-                *ngFor="let m of markers; let i = index"
-                (markerClick)="clickedMarker(m.label, i)"
-                [latitude]="m.lat"
-                [longitude]="m.lng"
-                [label]="m.label"
-                [markerDraggable]="m.draggable"
-                (dragEnd)="markerDragEnd(m, $event)">
-                
-            <agm-info-window>
-                <strong>InfoWindow content</strong>
-            </agm-info-window>
-            
-            </agm-marker>
-            
-            <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
-                [radius]="5000"
-                [fillColor]="'red'"
-                [circleDraggable]="true"
-                [editable]="true">
-            </agm-circle>
-        
-        </agm-map>
+    <po-container p-height="600px">
+        <google-map #maps  style="height: 600px; display: inline;">
+            <map-marker #mapsMarker *ngFor="let vertice of vertices"
+                      [position]="vertice"
+                      [options]="markerOptions"></map-marker>
+            <map-polyline #mapsPolyline [path]="vertices" [options]="polylineOptions"></map-polyline>
+        </google-map>
     </po-container>
-    <div style="background-color: red; width: 100%;">
-        
-    </div>
-    <div style="background-color: blue; width: 100%;">
+   
 
-    </div>
+<po-button p-label="Iniciar" (p-click)="initMarker()"></po-button>
+<!--po-button p-label="Adicionar" (p-click)="insertMarksCluster()"></po-button-->
 </div>
