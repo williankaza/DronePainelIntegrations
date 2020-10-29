@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { tap, catchError } from "rxjs/operators";
 
+const httpUri = 'uri/'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,14 +18,14 @@ export class HttpService {
   }
 
   get(url: string){
-    return this.http.get<any>(url, {
+    return this.http.get<any>(httpUri + url, {
       headers: this.headerParams,
       params: this.optionParams
-    }).pipe(tap())
+    }).pipe(tap(), catchError(this.showError.bind(this)))
   }
 
   post(url: string, body: string){
-    return this.http.post<any>(url, body, {
+    return this.http.post<any>(httpUri + url, body, {
       headers: this.headerParams,
       params: this.optionParams
     }).pipe(tap(), catchError(this.showError.bind(this)))

@@ -6,7 +6,7 @@
         <span class="po-font-title">Track Your Drone</span>
     </div>
 
-    <form #f="ngForm" class="template po-offset-xl-6 po-offset-lg-6 po-offset-sm-6 po-offset-md-6 po-lg-6 po-md-6 po-sm-6 po-pull-right po-pb-2 po-pr-0 po-pl-0">
+    <span class="template po-offset-xl-6 po-offset-lg-6 po-offset-sm-6 po-offset-md-6 po-lg-6 po-md-6 po-sm-6 po-pull-right po-pb-2 po-pr-0 po-pl-0">
         <div class="po-row">
         <po-input class="po-sm-6" name="label" [(ngModel)]="droneId" p-label="DroneID"></po-input>
         </div>
@@ -49,11 +49,9 @@
                         max="100">
                     </mat-slider>
                 </div>
-
-
-
             <div class="po-row">
-                <po-button id = "botao" class="po-md-3" p-label="Enable Tracking" (p-click)="restore()"></po-button>
+                <po-button id = "botao" class="po-md-3" p-label="Back" (p-click)="goBack()"></po-button>
+                <po-button id = "botao" class="po-md-3" p-label="{{ legendaBotao }}" (p-click)="restore()"></po-button>
             </div>
-    </form>
+    </span>
 </body>

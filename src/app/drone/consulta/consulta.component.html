@@ -4,8 +4,8 @@
             <span class="po-font-title">Consult Your Drone</span>
         </div>
     </span>
-    <span class="po-row">
-        <div class="po-offset-xl-6 po-offset-lg-6 po-offset-sm-6 po-offset-md-6 po-lg-6 po-md-6 po-sm-6 po-pull-right">
+    <span class="po-lg-12 po-xl-12 po-sm-12 po-md-12">
+        <div class="po-offset-xl-6 po-offset-lg-6 po-offset-sm-6 po-offset-md-6 po-lg-6 po-md-6 po-sm-6 po-pr-0 po-pl-0 po-pull-right">
             <po-table class="po-lg-12 po-md-12 po-sm-12 po-xl-12 po-pl-0 po-pr-0"
                 [p-columns]="gridCols"
                 [p-actions]="gridActions"
@@ -14,4 +14,6 @@
                 p-container='border'>
             </po-table>
         </div>
+        <po-button class="po-pull-right po-pt-2" p-label="Cadastrar novo drone" (p-click)="goToCadastro()"></po-button>
     </span>
+</body>

@@ -12,7 +12,6 @@ export class AppComponent {
   constructor(private router: Router, private route: ActivatedRoute){ }
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Home', action: this.goToHome.bind(this), icon: 'po-icon-home', shortLabel: "Home"},
     { label: 'Monitoramento', action: this.goToMonitoramento.bind(this), icon:"po-icon-world", shortLabel:"Monitor" },
     { label: 'Cadastro', action: this.goToCadastro.bind(this), icon:"po-icon-archive", shortLabel: "Register" }
   ];

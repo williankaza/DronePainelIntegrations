@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro', 
@@ -11,8 +12,10 @@ export class CadastroComponent implements OnInit {
   longitude: number 
   temperature: number
   airHumidity: number 
+  enabled: boolean = true
   ngForm: any;
-  constructor() { }
+  legendaBotao: string = "Enable Tracking"
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.restore();
@@ -28,15 +31,39 @@ export class CadastroComponent implements OnInit {
   }
 
   temperatureLabel(value: number) {
-
     return value + 'º';
   }
 
   airHumidityLabel(value: number) {
-
     return value + '%';
   }
 
+  createBodyNewDrone(){
+    return {
+      "idDrone": this.droneId,
+      "latitude": this.latitude,
+      "longitude": this.longitude,
+      "temperatura": this.temperature,
+      "umidade": this.airHumidity,
+      "dataAtualizacao": new Date().toISOString(),
+      "rastreamento": this.enabled
+    }
+  }
+  
+  createBodyUpdateDrone(){
+    return {
+      "latitude": this.latitude,
+      "longitude": this.longitude,
+      "temperatura": this.temperature,
+      "umidade": this.airHumidity,
+      "dataAtualizacao": new Date().toISOString(),
+      "rastreamento": this.enabled
+    }
+  }
+
+  goBack(){
+    this.router.navigateByUrl('/drone')
+  }
 }
 
 

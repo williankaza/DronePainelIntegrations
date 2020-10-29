@@ -3,13 +3,15 @@ import { PoTableColumn, PoTableAction, PoTableDetail } from '@po-ui/ng-component
 import { MouseEvent, AgmCoreModule } from '@agm/core';
 import { Observable } from 'rxjs';
 import { GoogleMap } from '@angular/google-maps';
+import { HttpService } from 'src/app/services/http.service';
 
 interface Medicoes{
   id: number,
   lat: number,
   lng: number,
   umidade?: number,
-  temperatura?: number
+  temperatura?: number,
+  dataAtualizacao?: string
 }
 
 interface Drones{
@@ -55,7 +57,8 @@ export class MonitoramentoComponent implements OnInit {
       { property: 'lat', label: 'Latitude', type: 'number'},
       { property: 'lng', label: 'Longitude', type: 'number' },
       { property: 'umidade', label: 'Umidade', type: 'number' },
-      { property: 'temperatura', label: 'Temperatura', type: 'number' }
+      { property: 'temperatura', label: 'Temperatura', type: 'number' },
+      { property: 'dataAtualizacao', label: 'Data atualização', type: 'string'}
     ], 
     typeHeader: 'top'
   };
@@ -98,117 +101,49 @@ export class MonitoramentoComponent implements OnInit {
     }
   ]
   
-  listDrones: Array<Drones> = [
-    {
-      id: '00000001',
-      latitude: 34.5199,
-      longitude: -105.8701, 
-      temperatura: -10,
-      umidade: 450,
-      medicoes: [
-        {
-          id: 1,
-          lat: 41.3851,
-          lng: 2.1734
-        },{
-          id: 2,
-          lat: -30.5595,
-          lng: 22.9375
-        },{
-          id: 3,
-          lat: -34.6037,
-          lng: -58.3816
-        },{
-          id: 4,
-          lat: 34.5199,
-          lng: -105.8701
-        },
-      ]
-    },
-    {
-      id: '00000002',
-      latitude: 51.5074,
-      longitude: 0.1278, 
-      temperatura: -10,
-      umidade: 450,
-      medicoes: [
-        {
-          id: 1,
-          lat: 35.6762,
-          lng: 139.6503
-        },{
-          id: 2,
-          lat: -23.5505,
-          lng: -46.6333
-        },{
-          id: 3,
-          lat: 43.6532,
-          lng: -79.3832
-        },{
-          id: 4,
-          lat: 51.5074,
-          lng: 0.1278
-        },
-      ]
-    },
-    {
-      id: '00000003',
-      latitude: 10.4806,
-      longitude: -66.9036, 
-      temperatura: -10,
-      umidade: 450,
-      medicoes: [
-        {
-          id: 1,
-          lat: 25.2048,
-          lng: 55.2708
-        },{
-          id: 2,
-          lat: 31.7917,
-          lng: -7.0926
-        },{
-          id: 3,
-          lat: 21.023232,
-          lng: -12.23231
-        },{
-          id: 4,
-          lat: 10.4806,
-          lng: -66.9036
-        },
-      ]
-    },
-    {
-      id: '00000004',
-      latitude: 64.2008,
-      longitude: -149.4937, 
-      temperatura: -10,
-      umidade: 450,
-      medicoes: [
-        {
-          id: 1,
-          lat: 21.023232,
-          lng: -12.23231
-        },{
-          id: 2,
-          lat: 7.10041,
-          lng: -1.5847
-        },{
-          id: 3,
-          lat: -33.8688,
-          lng: 151.2093
-        },{
-          id: 4,
-          lat: 64.2008,
-          lng: -149.4937
-        },
-      ]
-    }
-  ]
-  constructor() { }
+  listDrones: Array<Drones>
+  
+  constructor(private httpService: HttpService) {
+    this.listDrones = new Array()
+   }
 
   ngOnInit(): void {
     this.initMap()
+    this.loadGrid()
   }
+
+  loadGrid(){
+    this.httpService.restore();
+    this.httpService.get('drones').subscribe((response)=>{
+      response.forEach(drone => {
+        let medicoes = drone.medicoes
+        let lastMedicaoIndex = Math.max(...medicoes.filter(medicao => medicao.rastreamento).map(medicao => medicao.idMedicao))-1
+        
+        if (lastMedicaoIndex > -1){
+          let newDrone: Drones = {
+            id: drone.idDrone,
+            latitude: drone.medicoes[lastMedicaoIndex].latitude,
+            longitude: drone.medicoes[lastMedicaoIndex].longitude,
+            temperatura: drone.medicoes[lastMedicaoIndex].temperatura,
+            umidade: drone.medicoes[lastMedicaoIndex].umidade,
+            medicoes: (<Array<any>>drone.medicoes).filter(medicao => medicao.rastreamento).map((medicao)=>{
+              return <Medicoes> {
+                id: medicao.idMedicao,
+                lat: medicao.latitude,
+                lng: medicao.longitude,
+                temperatura: medicao.temperatura,
+                umidade: medicao.umidade,
+                dataAtualizacao: new Date(medicao.dataAtualizacao).toLocaleString()
+              }            
+            })
+          }
+          
+          this.listDrones.push(newDrone)
+        }
+      });
+    })
+  }
+
   insertGMPApiKey(key: string){
     AgmCoreModule.forRoot({
       apiKey: key
@@ -218,7 +153,7 @@ export class MonitoramentoComponent implements OnInit {
   initMap(): void {
     let initPos: google.maps.LatLng = new google.maps.LatLng(-23.574116, -46.623216)
     this.googleMaps.center = initPos;
-    this.googleMaps.zoom = 4
+    this.googleMaps.zoom = 2
     this.googleMaps.mapTypeId = google.maps.MapTypeId.SATELLITE
     this.googleMaps.width = '100%'
     this.googleMaps.height = '100%'
@@ -237,7 +172,7 @@ export class MonitoramentoComponent implements OnInit {
     row.medicoes.forEach((item)=>{
       let novaMarcacao: google.maps.LatLngLiteral = {
         lat: item.lat,
-        lng: item.lng
+        lng: item.lng,
       }
 
       this.vertices = [...this.vertices, novaMarcacao]

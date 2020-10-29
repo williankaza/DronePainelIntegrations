@@ -14,7 +14,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AgmCoreModule } from '@agm/core';
-import { MonitoramentoV2Component } from './monitoramento-v2/monitoramento-v2.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
@@ -22,8 +21,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     AppComponent,
     MonitoramentoComponent,
     ConsultaComponent,
-    CadastroComponent,
-    MonitoramentoV2Component
+    CadastroComponent
   ],
   imports: [
     BrowserModule,

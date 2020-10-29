@@ -1,7 +1,7 @@
 <div class="po-row po-lg-12 po-xl-12 po-sm-12 po-md-12">
     <p class="po-font-subtitle">Selecione o drone para visualizar o histórico no mapa</p>
 </div>
-<div class="monitor po-row po-lg-12 po-sm-12 po-xl-12 po-md-12">
+<div class="monitor po-row po-lg-12 po-sm-12 po-xl-12 po-md-12" >
     <po-container class="po-pl-0 po-lg-12 po-xl-12 po-sm-12 po-md-12">
         <po-table class="po-pl-0 po-lg-12 po-md-12 po-sm-12 po-xl-12"
             [p-columns]="gridCols"
@@ -12,7 +12,7 @@
         </po-table>
     </po-container>
     <po-container p-height="600px" class='po-lg-12 po-xl-12 po-sm-12 po-md-12'>
-        <google-map #maps  style="height: 600px; display: inline;">
+        <google-map #maps style="display: inline;">
             <map-marker #mapsMarker *ngFor="let vertice of vertices; index as mapsIndex"
                       [position]="vertice"
                       [label]="mapsIndex"
