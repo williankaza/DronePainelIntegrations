@@ -14,3 +14,6 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+// Timer em segundos para reenvio das informações
+localStorage['droneTimer'] = 35
