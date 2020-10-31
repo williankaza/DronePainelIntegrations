@@ -32,7 +32,7 @@ export class ConsultaComponent implements OnInit {
       type: 'number'
     },
     {
-      label: 'Quantidade medições',
+      label: 'Number of Measurements',
       property: 'qtdMedicoes',
       type: 'number'
     },

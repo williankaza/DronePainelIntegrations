@@ -33,3 +33,11 @@
     position: top;
     background-repeat: no-repeat;
 }
+
+:host ::ng-deep.po-button.po-text-ellipsis{
+    color: black;
+    font-weight: bold;
+    background-color: #FFAC2B;
+    border-color: white;
+    border-radius: 10px;
+}
