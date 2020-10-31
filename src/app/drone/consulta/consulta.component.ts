@@ -109,7 +109,7 @@ export class ConsultaComponent implements OnInit {
   }
 
   enviaNovasMedicoes(){
-    this.httpService.get('drones').subscribe(
+    this.httpService.get('drones', '/med').subscribe(
       (response)=>{
         response.forEach(droneResp => {
           let droneIndex = this.listDrones.findIndex(drone=> drone.id == droneResp.idDrone )

@@ -48,7 +48,7 @@ export class CadastroComponent implements OnInit {
   }
 
   getDrone(idDrone: number){
-    this.httpService.get('drones').subscribe(
+    this.httpService.get('drones', '/med').subscribe(
       (response)=>{
         response.forEach(drone => {
           if (drone.idDrone == this.droneId){
@@ -137,7 +137,7 @@ export class CadastroComponent implements OnInit {
 }
 
 interface BodyCadastro {
-  idDrone: number,
+  idDrone?: number,
   latitude: number,
   longitude: number,
   temperatura: number,

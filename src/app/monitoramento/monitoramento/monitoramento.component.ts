@@ -114,7 +114,7 @@ export class MonitoramentoComponent implements OnInit {
 
   loadGrid(){
     this.httpService.restore();
-    this.httpService.get('drones').subscribe((response)=>{
+    this.httpService.get('drones', '/med').subscribe((response)=>{
       response.forEach(drone => {
         let medicoes = drone.medicoes
         let lastMedicaoIndex = Math.max(...medicoes.filter(medicao => medicao.rastreamento).map(medicao => medicao.idMedicao))-1

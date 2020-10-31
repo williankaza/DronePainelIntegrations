@@ -25,7 +25,7 @@
 
 
         <div class="po-row">
-            <mat-slider #ctrl="ngModel" class = "po-lg-6"
+            <mat-slider #ctrl="ngModel" class = "po-sm-6"
                 [(ngModel)]= "temperature"
                 p-label="Temperature"
                 thumbLabel
@@ -39,7 +39,7 @@
         <div><span>Air Humidity</span></div>
 
         <div class="po-row">
-            <mat-slider #ctrl="ngModel" class = "po-lg-6"
+            <mat-slider #ctrl="ngModel" class = "po-sm-6"
                 [(ngModel)]= "airHumidity"
                 p-label="Air Humidity"
                 thumbLabel
@@ -58,8 +58,8 @@
             class="po-md-6 po-pr-0 po-pl-0" 
             [p-label]="enabled ? 'Disable Tracking' : 'Enable Tracking'" (p-click)="enabled = !enabled"></po-button>
         <div class="po-row po-pt-2">
-            <po-button class="po-md-3 btnAcao  po-pl-0" p-type="primary" p-label="Back" (p-click)="goBack()"></po-button>
-            <po-button class="po-md-3 btnAcao  po-pr-0" p-type="primary" p-label="Save" (p-click)="salvar()" [p-loading]="blockSave"></po-button>
+            <po-button class="po-md-3 btnAcao po-pl-0" p-type="primary" p-label="Back" (p-click)="goBack()"></po-button>
+            <po-button class="po-md-3 btnAcao po-pr-0" p-type="primary" p-label="Save" (p-click)="salvar()" [p-loading]="blockSave"></po-button>
         </div>
     </span>
 </body>
