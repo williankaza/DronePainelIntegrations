@@ -21,3 +21,29 @@
     border-radius: 10px;
     font-weight: bold;
 }
+
+:host ::ng-deep .btnAcao button.po-button.po-text-ellipsis.po-button-primary:hover {
+    background-color: #fdbf5e;
+}
+
+:host ::ng-deep .btnDisabled  button.po-button{
+    background-color: #e47e7e;
+}
+
+:host ::ng-deep .btnEnabled  button.po-button{
+    background-color: #abdd8a;
+}
+
+:host ::ng-deep .btnDisabled  button.po-button:hover{
+    opacity: 0.9;
+}
+
+:host ::ng-deep .btnEnabled  button.po-button:hover{
+    opacity: 0.9;
+}
+
+:host ::ng-deep button.po-button.po-text-ellipsis.po-button-primary:disabled {
+    background-color: lightslategray;
+    color: white;
+    font-weight: 400;
+}

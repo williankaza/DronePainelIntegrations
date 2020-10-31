@@ -8,50 +8,58 @@
 
     <span class="template po-offset-xl-6 po-offset-lg-6 po-offset-sm-6 po-offset-md-6 po-lg-6 po-md-6 po-sm-6 po-pull-right po-pb-2 po-pr-0 po-pl-0">
         <div class="po-row">
-        <po-input class="po-sm-6" name="label" [(ngModel)]="droneId" p-label="DroneID"></po-input>
+            <po-number #ctrl="ngModel" class="po-sm-6" name="label" [(ngModel)]="droneId" p-label="DroneID"></po-number>
         </div>
 
         <div class="po-row">
-            <po-input class="po-sm-6" name="label" [(ngModel)]="latitude" p-label="Latitude"></po-input>
-            </div>
+            <po-decimal #ctrl="ngModel" class="po-sm-6" name="label" [(ngModel)]="latitude" p-label="Latitude" p-min="-90" p-max="90" p-decimals-length=4></po-decimal>
+        </div>
 
-            <div class="po-row">
-                <po-input class="po-sm-6" name="label" [(ngModel)]="longitude" p-label="Longitude"></po-input>
-                </div>
+        <div class="po-row">
+            <po-decimal #ctrl="ngModel" class="po-sm-6" name="label" [(ngModel)]="longitude" p-label="Longitude" p-min="-180" p-max="180" p-decimals-length=4></po-decimal>
+        </div>
 
-                <div>
-                    <span>Temperature</span>
-                </div>
+        <div>
+            <span>Temperature</span>
+        </div>
 
 
-                <div class="po-row">
-                    <mat-slider class = "po-lg-6"
-                        [(ngModel)]= "temperature"
-                        p-label="Temperature"
-                        thumbLabel
-                        [displayWith]="temperatureLabel"
-                        tickInterval="40"
-                        min="-25"
-                        max="40">
-                    </mat-slider>
-                </div>
+        <div class="po-row">
+            <mat-slider #ctrl="ngModel" class = "po-lg-6"
+                [(ngModel)]= "temperature"
+                p-label="Temperature"
+                thumbLabel
+                [displayWith]="temperatureLabel"
+                tickInterval="40"
+                min="-25"
+                max="40">
+            </mat-slider>
+        </div>
 
-                <div><span>Air Humidity</span></div>
+        <div><span>Air Humidity</span></div>
 
-                <div class="po-row">
-                    <mat-slider class = "po-lg-6"
-                        [(ngModel)]= "airHumidity"
-                        p-label="Air Humidity"
-                        thumbLabel
-                        [displayWith]="airHumidityLabel"
-                        tickInterval="100"
-                        min="0"
-                        max="100">
-                    </mat-slider>
-                </div>
-            <div class="po-row">
-                <po-button id = "botao" class="po-md-3" p-label="Back" (p-click)="goBack()"></po-button>
-                <po-button id = "botao" class="po-md-3" p-label="{{ legendaBotao }}" (p-click)="restore()"></po-button>
-            </div>
+        <div class="po-row">
+            <mat-slider #ctrl="ngModel" class = "po-lg-6"
+                [(ngModel)]= "airHumidity"
+                p-label="Air Humidity"
+                thumbLabel
+                [displayWith]="airHumidityLabel"
+                tickInterval="100"
+                min="0"
+                max="100">
+            </mat-slider>
+        </div>
+        <po-info class="po-pt-2 po-row" p-label="Status" [p-value]="enabled ? 'Drone active' : 'Drone deactivated' " p-orientation="horizontal"></po-info>
+        <po-button
+            [ngClass]="{
+                'btnDisabled': enabled == true,
+                'btnEnabled': enabled == false
+            }"
+            class="po-md-6 po-pr-0 po-pl-0" 
+            [p-label]="enabled ? 'Disable Tracking' : 'Enable Tracking'" (p-click)="enabled = !enabled"></po-button>
+        <div class="po-row po-pt-2">
+            <po-button class="po-md-3 btnAcao  po-pl-0" p-type="primary" p-label="Back" (p-click)="goBack()"></po-button>
+            <po-button class="po-md-3 btnAcao  po-pr-0" p-type="primary" p-label="Save" (p-click)="salvar()" [p-loading]="blockSave"></po-button>
+        </div>
     </span>
 </body>

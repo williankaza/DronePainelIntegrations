@@ -11,7 +11,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatSliderModule } from "@angular/material/slider";
 import { PoModule } from '@po-ui/ng-components';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -30,6 +30,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatMenuModule,
     MatSliderModule,
     FormsModule,
+    ReactiveFormsModule,
     PoModule,
     GoogleMapsModule,
     AgmCoreModule.forRoot({

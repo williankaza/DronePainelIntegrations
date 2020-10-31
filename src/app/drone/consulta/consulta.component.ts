@@ -5,21 +5,8 @@ import { HttpService } from 'src/app/services/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { timer, interval, Subscription } from "rxjs";
+import { Drones, Medicao, Generics } from 'src/app/core/generics';
 
-interface Drones{
-  id: string,
-  qtdMedicoes: number,
-  lastMedicao: Array<Medicao>
-}
-
-interface Medicao{
-  temperatura: number,
-  umidade: number,
-  latitude: number,
-  longitude: number,
-  rastreamento: boolean,
-  dataAtualizacao: string
-}
 
 @Component({
   selector: 'app-consulta',
@@ -90,8 +77,6 @@ export class ConsultaComponent implements OnInit {
       this.timerTick = parseInt(localStorage['droneTimer']) * 1000
     } 
     this.originalTimer = this.timerTick
-    this.getDrones()
-    
     this.createTimer(this.timerTick)
 
     interval(1000).pipe(map((x)=>{
@@ -107,36 +92,13 @@ export class ConsultaComponent implements OnInit {
   }
 
   goToDroneEdit(row: any){
-    this.router.navigate(['./cadastro', row.id], { relativeTo: this.route })
-  }
-
-  getDrones(){
-    /*
-    this.httpService.get('drones').subscribe(response=>{
-      response.forEach(droneResp => {
-          let ultimaMedicao = this.getDadosLastMedicao(droneResp.medicoes)
-
-          let drone: Drones = {
-            id: droneResp.idDrone,
-            qtdMedicoes: droneResp.medicoes?.length,
-            lastMedicao: [{
-              latitude: ultimaMedicao.latitude,
-              longitude: ultimaMedicao.longitude,
-              temperatura: ultimaMedicao.temperatura,
-              umidade: ultimaMedicao.umidade,
-              rastreamento: ultimaMedicao.rastreamento,
-              dataAtualizacao: ultimaMedicao.dataAtualizacao
-            }]
-          }
-
-          this.listDrones.push(drone)
-      });
-    })
-    */
+    window.open(this.router.url + '/cadastro/' + row.id)
+    //this.router.navigate(['./cadastro', row.id], { relativeTo: this.route })
   }
 
   goToCadastro(){
-    this.router.navigate(['./cadastro'], { relativeTo: this.route })
+    window.open(this.router.url + '/cadastro/')
+    //this.router.navigate(['./cadastro'], { relativeTo: this.route })
   }
 
   forcarEnvio(){
@@ -153,7 +115,7 @@ export class ConsultaComponent implements OnInit {
           let droneIndex = this.listDrones.findIndex(drone=> drone.id == droneResp.idDrone )
           
           if (droneIndex > -1 ){
-            let lastMedicao = this.getDadosLastMedicao(droneResp.medicoes)
+            let lastMedicao = Generics.getDadosLastMedicao(droneResp.medicoes)
             this.listDrones[droneIndex].qtdMedicoes = (droneResp.medicoes).length
             this.listDrones[droneIndex].lastMedicao[0] = lastMedicao
 
@@ -161,7 +123,7 @@ export class ConsultaComponent implements OnInit {
               this.sendNewMedicao({ id: droneResp.idDrone, lastMedicao: lastMedicao })
             }
           } else {
-            let ultimaMedicao = this.getDadosLastMedicao(droneResp.medicoes)
+            let ultimaMedicao = Generics.getDadosLastMedicao(droneResp.medicoes)
 
             let drone: Drones = {
               id: droneResp.idDrone,
@@ -187,23 +149,9 @@ export class ConsultaComponent implements OnInit {
 
   sendNewMedicao(novaMedicao: { id: string, lastMedicao: Medicao } ){
     novaMedicao.lastMedicao.dataAtualizacao = new Date().toISOString()
-    this.httpService.post('drone/' + novaMedicao.id + '/medicoes', JSON.stringify(novaMedicao.lastMedicao)).subscribe(
+    this.httpService.post('drone/' + novaMedicao.id + '/medicoes', JSON.stringify(novaMedicao.lastMedicao),'med/').subscribe(
 
     )
   }
-  getDadosLastMedicao(medicoesDrone: any): Medicao{
-    let ultimaMedicao = medicoesDrone.filter(x=> x.rastreamento ).sort((a,b) => a.dataAtualizacao < b.dataAtualizacao ? 1:-1)
-
-    if (ultimaMedicao != undefined){
-      return {
-        latitude: ultimaMedicao[0].latitude,
-        longitude: ultimaMedicao[0].longitude,
-        temperatura: ultimaMedicao[0].temperatura,
-        umidade: ultimaMedicao[0].umidade,
-        rastreamento: ultimaMedicao[0].rastreamento,
-        dataAtualizacao: ultimaMedicao[0].dataAtualizacao
-      }
-    }
-    
-  }
+  
 }
